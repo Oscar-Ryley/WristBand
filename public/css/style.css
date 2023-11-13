@@ -12,7 +12,14 @@
 
 #link-button {
     background-color:purple; 
-    border:none;
+    border: none;
+    outline: none;
+}
+
+#link-button:focus {
+    border: none;
+    outline: none;
+    background-color:indigo;
 }
 
 footer {
