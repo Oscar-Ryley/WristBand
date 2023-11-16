@@ -1,4 +1,5 @@
-song_list = [["05/10", "MCS", "Smoke Gets in Your Eyes", "Gertrude Niesen with Ray Sinatra", "https://www.youtube.com/watch?v=bTRACvVc5zE&ab_channel=SwingBluesJazz78RPM", "Concertina"],
+song_list = [
+["05/10", "MCS", "Smoke Gets in Your Eyes", "Gertrude Niesen with Ray Sinatra", "https://www.youtube.com/watch?v=bTRACvVc5zE&ab_channel=SwingBluesJazz78RPM", "Concertina"],
 ["05/10", "Prog", "King James Version", "Billy Bragg", "https://www.youtube.com/watch?v=hNVBwWkUtJI&ab_channel=hmc1410", "Concertina"],
 ["06/10", "Prog", "Reynardine", "trad/ Fairport Convention", "https://www.youtube.com/watch?v=O3RMut_8IxQ&ab_channel=deviantdopefiend", "Voice"],
 ["12/10", "MCS", "Nobody Knows You When You're Down and Out", "Bessie Smith", "https://www.youtube.com/watch?v=kxTyV_cBz7o&ab_channel=BessieSmithVEVO", "Concertina"],
@@ -15,7 +16,10 @@ song_list = [["05/10", "MCS", "Smoke Gets in Your Eyes", "Gertrude Niesen with R
 ["09/11", "MCS", "Raglan Road", "Luke Kelly", "https://www.youtube.com/watch?v=ZIqr1Ge8Z5w", "Concertina"],
 ["09/11", "Prog", "Fareweel Regality", "The Unthanks", "https://www.youtube.com/watch?v=-d7AzaPptl8", "Concertina"],
 ["10/11", "Prog", "Shiver me timbers", "Tom Waits", "https://www.youtube.com/watch?v=vfLY8NZCQMg", "Concertina"],
-["", "", "", "", "", ""]];
+["16/11", "Prog", "The Goslings", "Frederick Bridge", "https://www.youtube.com/watch?v=wHpjUfCEAr4", "Concertina"]
+];
+
+template = ["", "", "", "", "", ""]
 
 class song {
     constructor(date_of_song, module_of_song, song_title, song_artist, song_link, song_instrument) {
