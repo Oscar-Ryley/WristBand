@@ -1,4 +1,4 @@
-song_list = [
+let song_list = [
 ["05/10", "MCS", "Smoke Gets in Your Eyes", "Gertrude Niesen with Ray Sinatra", "https://www.youtube.com/watch?v=bTRACvVc5zE&ab_channel=SwingBluesJazz78RPM", "Concertina"],
 ["05/10", "Prog", "King James Version", "Billy Bragg", "https://www.youtube.com/watch?v=hNVBwWkUtJI&ab_channel=hmc1410", "Concertina"],
 ["06/10", "Prog", "Reynardine", "trad/ Fairport Convention", "https://www.youtube.com/watch?v=O3RMut_8IxQ&ab_channel=deviantdopefiend", "Voice"],
@@ -16,21 +16,11 @@ song_list = [
 ["09/11", "MCS", "Raglan Road", "Luke Kelly", "https://www.youtube.com/watch?v=ZIqr1Ge8Z5w", "Concertina"],
 ["09/11", "Prog", "Fareweel Regality", "The Unthanks", "https://www.youtube.com/watch?v=-d7AzaPptl8", "Concertina"],
 ["10/11", "Prog", "Shiver me timbers", "Tom Waits", "https://www.youtube.com/watch?v=vfLY8NZCQMg", "Concertina"],
-["16/11", "Prog", "The Goslings", "Frederick Bridge", "https://www.youtube.com/watch?v=wHpjUfCEAr4", "Concertina"]
+["16/11", "Prog", "The Goslings", "Frederick Bridge", "https://www.youtube.com/watch?v=wHpjUfCEAr4", "Concertina"],
+["17/11", "Prog", "She", "Elvis Costello (from Notting Hill)", "https://www.youtube.com/watch?v=O040xuq2FR0", "Concertina"]
 ];
 
-template = ["", "", "", "", "", ""]
-
-class song {
-    constructor(date_of_song, module_of_song, song_title, song_artist, song_link, song_instrument) {
-        this.date = date_of_song;
-        this.module = module_of_song;
-        this.title = song_title;
-        this.artist = song_artist;
-        this.link = song_link;
-        this.instrument = song_instrument;
-    }
-}
+let template = ["", "", "", "", "", ""]
 
 function generate(){
     for (let i = 0; i < song_list.length; i++) {
