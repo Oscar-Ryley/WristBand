@@ -43,7 +43,15 @@ let song_list = [
   { "text":["16/11", "Prog", "The Goslings", "Frederick Bridge", "https://www.youtube.com/watch?v=wHpjUfCEAr4", "Concertina"], 
   "tags":["Prog", "Concertina", "November"]},
   { "text":["17/11", "Prog", "She", "Elvis Costello (from Notting Hill)", "https://www.youtube.com/watch?v=O040xuq2FR0", "Concertina"], 
-  "tags":["Prog", "Concertina", "November"]}
+  "tags":["Prog", "Concertina", "November"]},
+  { "text":["20/11", "MCS", "The Maid of Llanwellyn", "Kate Rusby", "https://www.youtube.com/watch?v=lo05meaz97I", "Concertina"], 
+  "tags":["MCS", "Concertina", "November"]},
+  { "text":["23/11", "MCS", "House of the Rising Sun", "The Animals", "https://www.youtube.com/watch?v=4-43lLKaqBQ", "Concertina"], 
+  "tags":["MCS", "Concertina", "Normal"]},
+  { "text":["23/11", "Prog", "", "", "", "Concertina"], 
+  "tags":["Prog", "Concertina", "Normal"]},
+  { "text":["", "", "", "", "", "Concertina"], 
+  "tags":["", "Concertina", ""]}
 ];
 
 app.get('/', (req, res) => {
