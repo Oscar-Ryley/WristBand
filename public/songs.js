@@ -24,8 +24,16 @@ let template = ["", "", "", "", "", ""]
 
 function generate(){
     for (let i = 0; i < song_list.length; i++) {
-        document.getElementById("jsinput").insertAdjacentHTML("afterend", 
+        this.document.getElementById("jsinput").insertAdjacentHTML("afterend", 
         `<div class="card song-container my-auto" style="width: 18rem;"><div class="card-body"><h4 class="card-title">${song_list[i][2]}</h4><h5 class="card-text">by ${song_list[i][3]}</h5><p class="card-text">Instrument: ${song_list[i][5]}<br> Lecture: ${song_list[i][1]}<br> Date: ${song_list[i][0]}</p><a href="${song_list[i][4]}" target = "_blank" class="btn btn-primary" id="link-button">Link to Video</a></div></div><br>`
         );
     }
 }
+
+window.addEventListener('click', function(event){
+    this.fetch('http://127.0.0.1:8080/songs/song')
+    .then(response => response.text())
+    .then(body =>
+      this.document.getElementById('content').innerHTML=body
+      )
+  })
