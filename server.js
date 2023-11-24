@@ -50,8 +50,8 @@ let song_list = [
   "tags":["song", "MCS", "Concertina", "November"]},
   { "text":["23/11", "Prog", "Song for Yesterday", "Kris Drever", "https://www.youtube.com/watch?v=JzGth-NbRUE", "Concertina"], 
   "tags":["song", "Prog", "Concertina", "November"]},
-  { "text":["", "", "", "", "", "Concertina"], 
-  "tags":["song", "", "Concertina", ""]}
+  { "text":["24/11", "Prog", "Lady Franklin’s Lament / Lord Franklin", "Bob Dylan/ it's a folk song", "https://www.youtube.com/watch?v=zl5EI3odI8w", "Concertina"], 
+  "tags":["song", "Prog", "Concertina", "November"]}
 ];
 
 app.get('/', (req, res) => {
