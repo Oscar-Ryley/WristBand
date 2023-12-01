@@ -2,15 +2,17 @@ const http = require("http");
 const express = require("express"); 
 const path = require("path");
 const app = express(); 
-const fs = require('fs')
+const fs = require('fs');
+const { allowedNodeEnvironmentFlags } = require("process");
 app.use(express.static(path.join(__dirname, 'public'))); 
+// app.use(express.urlencoded())
 
 let song_list = [
   { "text":["05/10", "MCS", "Smoke Gets in Your Eyes", "Gertrude Niesen with Ray Sinatra", "https://www.youtube.com/watch?v=bTRACvVc5zE&ab_channel=SwingBluesJazz78RPM", "Concertina"], 
   "tags":["song", "MCS", "Concertina", "October"]},
   { "text":["05/10", "Prog", "King James Version", "Billy Bragg", "https://www.youtube.com/watch?v=hNVBwWkUtJI&ab_channel=hmc1410", "Concertina"], 
   "tags":["song", "Prog", "Concertina", "October"]},
-  { "text":["06/10", "Prog", "Reynardine", "trad/ Fairport Convention", "https://www.youtube.com/watch?v=O3RMut_8IxQ&ab_channel=deviantdopefiend", "Voice"], 
+  { "text":["06/10", "Prog", "Reynardine", "Sandy Denny/ Fairport Convention", "https://www.youtube.com/watch?v=O3RMut_8IxQ&ab_channel=deviantdopefiend", "Voice"], 
   "tags":["song", "Prog", "Voice", "October"]},
   { "text":["12/10", "MCS", "Nobody Knows You When You're Down and Out", "Bessie Smith", "https://www.youtube.com/watch?v=kxTyV_cBz7o&ab_channel=BessieSmithVEVO", "Concertina"], 
   "tags":["song", "MCS", "Concertina", "October"]},
@@ -50,8 +52,14 @@ let song_list = [
   "tags":["song", "MCS", "Concertina", "November"]},
   { "text":["23/11", "Prog", "Song for Yesterday", "Kris Drever", "https://www.youtube.com/watch?v=JzGth-NbRUE", "Concertina"], 
   "tags":["song", "Prog", "Concertina", "November"]},
-  { "text":["24/11", "Prog", "Lady Franklin’s Lament / Lord Franklin", "Bob Dylan/ it's a folk song", "https://www.youtube.com/watch?v=zl5EI3odI8w", "Concertina"], 
-  "tags":["song", "Prog", "Concertina", "November"]}
+  { "text":["24/11", "Prog", "Lady Franklin's Lament / Lord Franklin", "Bob Dylan/ it's a folk song", "https://www.youtube.com/watch?v=zl5EI3odI8w", "Concertina"], 
+  "tags":["song", "Prog", "Concertina", "November"]},
+  { "text":["30/11", "MCS", "Jack Frost", "Eliza Carthy, Waterson:Carthey", "https://www.youtube.com/watch?v=uw-L5oEzvlU", "Concertina"], 
+  "tags":["song", "MCS", "Concertina", "November"]},
+  { "text":["30/11", "Prog", "I'm going to do it all", "Karine Polwart", "https://www.youtube.com/watch?v=6YYRXrW-XKA&ab_channel=MRFHM", "Concertina"], 
+  "tags":["song", "Prog", "Concertina", "November"]},
+  { "text":["01/12", "Prog", "Stranger to Himself", "Sandy Denny", "https://www.youtube.com/watch?v=yRnUHlDQ1OU", "Concertina"], 
+  "tags":["song", "Prog", "Concertina", "December"]}
 ];
 
 app.get('/', (req, res) => {
