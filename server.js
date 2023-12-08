@@ -127,6 +127,10 @@ const songList = [
   {
     text: ['07/12', 'Prog', '(You Make Me Feel Like) A Natural Woman [bloke]', 'Carole King (Aretha Franklin)', 'https://www.youtube.com/watch?v=8jCFzreP1ng', 'Concertina'],
     tags: ['song', 'Prog', 'Concertina', 'December']
+  },
+  {
+    text: ['08/12', 'Prog', 'The Parting Glass', 'The Clancy Brothers', 'https://www.youtube.com/watch?v=1se8_-fcxZs', 'Concertina'],
+    tags: ['song', 'Prog', 'Concertina', 'December']
   }
 ];
 
