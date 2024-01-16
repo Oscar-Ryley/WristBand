@@ -1,17 +1,31 @@
 #body {
-    background-color:#451F55; 
+    background-color: #393939; 
     color: #EFE9E7;
     font-family: "Roboto", sans-serif;
     padding: 5%
 }
 
+#header {
+    background-color: #1a1a1a;
+    color: #EFE9E7;
+    font-family: "Roboto", sans-serif;
+}
+
+a {
+    color:#EFE9E7;
+}
+
+a:hover{
+    color:white;
+}
+
 .song-container {
-    background-color: #724E91; 
+    background-color: #390139; 
     border-radius: 10%;
 }
 
 #link-button {
-    background-color:purple; 
+    background-color:blueviolet; 
     border: none;
     outline: none;
 }
@@ -19,11 +33,11 @@
 #link-button:focus {
     border: none;
     outline: none;
-    background-color:indigo;
+    background-color:blueviolet;
 }
 
 footer {
-    background-color: #22162B;
+    background-color: #1a1a1a;
     color: #EFE9E7;
     font-family: "Roboto", sans-serif;
 }
