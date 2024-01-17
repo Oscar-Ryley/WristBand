@@ -16,11 +16,15 @@
         <nav id="header" class="navbar navbar-expand-lg fixed-top justify-content-center">
             <a class="navbar-brand" href=""><img src="./assets/Logo.png" width="200px"></img></a>
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">O</a>
+                <img id="profile-pic" src="./assets/Oscar-Ryley-Profile-Picture.png" width="50px" height="50px" alt="profile picture">
                 <a id="username" class="nav-item nav-link active" href="#">Username</a>
             </div>
             <div>
-                <button id="log-button" class="btn btn-outline-primary" type="submit" data-toggle="modal" data-target="#NewLog">Log +</button>
+                <button id="log-button" class="btn btn-outline-primary" type="submit" data-toggle="modal" data-target="#NewLog">Log
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                </button>
                 
             </div>
             <form id="search-bar-form" class="form-inline">
@@ -37,9 +41,10 @@
         <div id="profile-bar" class="jumbotron container">
             <div class="row">
                 <div class="col-sm">
-                    Profile Picture
+                    <img id="profile-pic-large" src="./assets/Oscar-Ryley-Profile-Picture.png" width="180px" height="180px" alt="profile picture">
                 </div>
-                <div class="col-sm">
+                <div class="col-6">
+                    <br>
                     <div class="row">
                         <h1 id="profile-username"> Username </h1>
                     </div>
@@ -48,7 +53,10 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <p>Number of Posts</p>
+                    <br>
+                    <h2> <div id="posts-number"> # </div> posts </h2>
+                    <button id="edit-button" class="btn btn-outline-primary" type="submit" data-toggle="modal" data-target="#EditProfile">Edit Profile</button>
+                    <button id="edit-button" class="btn btn-outline-primary" type="submit" data-toggle="modal" data-target="#NewLog">Log a Song</button>
                 </div>
             </div>
         </div>
@@ -65,6 +73,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Log a Song seen Live</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Modal contents
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" id="EditProfile">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Profile</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
