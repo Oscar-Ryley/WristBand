@@ -9,6 +9,7 @@ app.use(express.json());
 // app.use(express.urlencoded())
 
 const posts = require('./data/posts.json'); 
+const profiles = require('./data/profiles.json'); 
 var user = 0;
 
 var songList = [];
@@ -16,6 +17,8 @@ var i = 0;
 for (i in posts[user]) {
   songList.push(posts[user][i]);
 };
+
+var userdata = profiles[user];
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
@@ -48,6 +51,11 @@ app.get('/songs/:tag', function (req, res) {
     }
   }
   res.send(results);
+});
+
+app.get('/user/', function (req, res) {
+  var userdata = profiles[user];
+  res.send(userdata);
 });
 
 module.exports = app;
