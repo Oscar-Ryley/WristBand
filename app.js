@@ -6,6 +6,7 @@ const fs = require('fs');
 const { allowedNodeEnvironmentFlags } = require('process');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use('/images', express.static('images'));
 // app.use(express.urlencoded())
 
 const posts = require('./data/posts.json'); 
@@ -54,8 +55,20 @@ app.get('/songs/:tag', function (req, res) {
 });
 
 app.get('/user/', function (req, res) {
-  var userdata = profiles[user];
+  const userdata = profiles[user];
   res.send(userdata);
+});
+
+app.get('/profile-pic/', function (req, res) {
+  var src = profiles[user]["profile-pic"]
+  src = __dirname + src
+  res.sendFile(src)
+});
+
+app.put('/changeuser/', function (req, res) {
+  console.log(req.body);
+  user = req.body;
+  res.end();
 });
 
 module.exports = app;

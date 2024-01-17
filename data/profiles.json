@@ -2,11 +2,11 @@
     "0": {
         "username": "Oscar Ryley",
         "biography": "I like punk rock music, but prefer to listen to music performed during calculus lectures.",
-        "profile-pic": "../assets/profile-pictures/Oscar-Ryley-Profile-Picture.png"
+        "profile-pic": "/assets/profile-pictures/Oscar-Ryley-Profile-Picture.png"
     },
     "1": {
         "username": "Second Profile",
         "biography": "Test Second Profile Biography",
-        "profile-pic": "../assets/profile-pictures/blank-profile-pic.jpg"
+        "profile-pic": "/assets/profile-pictures/blank-profile-pic.jpg"
     }
 }

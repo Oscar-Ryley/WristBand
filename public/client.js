@@ -27,25 +27,15 @@ window.addEventListener('load', async function (event) {
 }
 );
 
-async function loadTaggedFacts(tag){
-  let response = await fetch('http://127.0.0.1:8080/songs/' + tag);
-  if(response.ok){
-    let songList = await response.json();
-    console.WriteLine(songList)
-    document.getElementById("content").innerHTML = html;
-  } else{
-      alert("Sorry you cannot type you have a 404");
-  }
-};
+form = document.getElementById("username");
 
-let sf = document.getElementById("search-bar-form")
-
-sf.addEventListener("submit", async function(event){
-  event.preventDefault();
-  try{
-    let tag = document.getElementById("tag-search").value;
-    loadTaggedFacts(tag);
-  } catch(e) {
-    alert(e);
-  }
+form.addEventListener("click", async (event) => {
+  const response = await fetch("http://127.0.0.1:8080/fact/new2", {
+    method: "POST",
+    // need to set headers to make sure the server knows to invoke the JSON parser
+    headers: {
+      "Content-Type": "integer"
+    },
+    body: 1
+  });
 });
