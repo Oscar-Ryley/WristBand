@@ -9,14 +9,13 @@ app.use(express.json());
 // app.use(express.urlencoded())
 
 const posts = require('./data/posts.json'); 
-
 var user = 0;
 
 var songList = [];
-for (let i =0; i <= 31; i++) {
+var i = 0;
+for (i in posts[user]) {
   songList.push(posts[user][i]);
 };
-
 console.log(songList);
 
 app.get('/', (req, res) => {

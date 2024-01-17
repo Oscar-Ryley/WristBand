@@ -1,14 +1,23 @@
 #body {
-    background-color: #393939; 
+    background-color: #353535; 
     color: #EFE9E7;
     font-family: "Roboto", sans-serif;
     padding: 5%
 }
 
 #header {
-    background-color: #1a1a1a;
+    background-color: #252525;
     color: #EFE9E7;
     font-family: "Roboto", sans-serif;
+}
+
+#log-button {
+    margin-right: 10pt;
+}
+
+#search-button {
+    font-size: 80%;
+    margin-left: 5pt;
 }
 
 a {
@@ -20,20 +29,8 @@ a:hover{
 }
 
 .song-container {
-    background-color: #390139; 
+    background-color: #191d2e; 
     border-radius: 10%;
-}
-
-#link-button {
-    background-color:blueviolet; 
-    border: none;
-    outline: none;
-}
-
-#link-button:focus {
-    border: none;
-    outline: none;
-    background-color:blueviolet;
 }
 
 footer {
