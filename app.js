@@ -16,7 +16,6 @@ var i = 0;
 for (i in posts[user]) {
   songList.push(posts[user][i]);
 };
-console.log(songList);
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
