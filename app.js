@@ -12,14 +12,10 @@ app.use('/images', express.static('images'));
 const posts = require('./data/posts.json'); 
 const profiles = require('./data/profiles.json'); 
 var user = 0;
-
 var songList = [];
-var i = 0;
 for (i in posts[user]) {
   songList.push(posts[user][i]);
 };
-
-var userdata = profiles[user];
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
@@ -68,6 +64,11 @@ app.get('/profile-pic/', function (req, res) {
 app.put('/changeuser/', function (req, res) {
   console.log(req.body);
   user = req.body;
+  var songList = [];
+  for (i in posts[user]) {
+    songList.push(posts[user][i]);
+  };
+  var userdata = profiles[user];
   res.end();
 });
 

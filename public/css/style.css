@@ -58,6 +58,12 @@ a:hover{
     color:white;
 }
 
+#accounts-dropdown {
+    margin-right:5%;
+    margin-left:auto;
+    padding:1%;
+}
+
 .song-container {
     background-color: #2d2d2d; 
     border-radius: 10%;
@@ -65,7 +71,7 @@ a:hover{
 
 .modal {
     color:black;
-    background-color: rgba(0,0,0,.2);
+    background-color: #353535;
 }
 
 .modal-content {
