@@ -6,16 +6,10 @@ const fs = require('fs');
 const { allowedNodeEnvironmentFlags } = require('process');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.use('/images', express.static('images'));
-// app.use(express.urlencoded())
+app.use(express.urlencoded());
 
-const posts = require('./data/posts.json'); 
+const posts = require('./data/posts.json');
 const profiles = require('./data/profiles.json'); 
-var user = 0;
-var songList = [];
-for (i in posts[user]) {
-  songList.push(posts[user][i]);
-};
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
@@ -25,7 +19,7 @@ app.get('/', (req, res) => {
     };
     res.writeHeader(200, { 'Content-Type': 'text/html' });
     res.write(html);
-    res.send("403");
+    res.send('403');
 ``;
   });
 });
@@ -39,9 +33,27 @@ app.get('/tags', function (req, res) {
   res.send([...tagSet]);
 });
 
-app.get('/songs/:tag', function (req, res) {
+app.get('/songs/:user', function (req, res) {
+  const user = req.params.user;
+  const songList = [];
+  for (var i in posts[user]) {
+    songList.push(posts[user][i]);
+  };
+  var results = [];
+  for (const song of songList) {
+      results.push(song.text);
+  };
+  res.send(results);
+});
+
+app.get('/songs/:user/:tag', function (req, res) {
   const tag = req.params.tag;
-  const results = [];
+  const user = req.params.user;
+  var songList = [];
+  for (var i in posts[user]) {
+    songList.push(posts[user][i]);
+  };
+  var results = [];
   for (const song of songList) {
     if (song.tags.includes(tag)) {
       results.push(song.text);
@@ -50,25 +62,27 @@ app.get('/songs/:tag', function (req, res) {
   res.send(results);
 });
 
-app.get('/user/', function (req, res) {
+app.get('/user/:id', function (req, res) {
+  const user = req.params.id;
   const userdata = profiles[user];
   res.send(userdata);
 });
 
-app.get('/profile-pic/', function (req, res) {
-  var src = profiles[user]["profile-pic"]
-  src = __dirname + src
-  res.sendFile(src)
+app.get('/user/:id/profile-pic/', function (req, res) {
+  const id = req.params.id;
+  let src = profiles[id]['profile-pic'];
+  src = __dirname + src;
+  res.sendFile(src);
 });
 
 app.put('/changeuser/', function (req, res) {
-  console.log(req.body);
-  user = req.body;
-  var songList = [];
-  for (i in posts[user]) {
+  data = req.body;
+  globalThis.user = data.num;
+  const songList = [];
+  for (var i in posts[user]) {
     songList.push(posts[user][i]);
   };
-  var userdata = profiles[user];
+  const userdata = profiles[user];
   res.end();
 });
 
