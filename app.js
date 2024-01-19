@@ -1,12 +1,8 @@
-const http = require('http');
 const express = require('express');
 const path = require('path');
 const app = express();
-const fs = require('fs');
-const { allowedNodeEnvironmentFlags } = require('process');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.use(express.urlencoded());
 
 const posts = require('./data/posts.json');
 const profiles = require('./data/profiles.json'); 
@@ -62,6 +58,14 @@ app.get('/songs/:user/:tag', function (req, res) {
   res.send(results);
 });
 
+app.get('/users', function (req, res) {
+  var userids = [];
+  for(var i in profiles) {
+    userids.push(i);
+  };
+  res.send(userids);
+});
+
 app.get('/user/:id', function (req, res) {
   const user = req.params.id;
   const userdata = profiles[user];
@@ -73,17 +77,6 @@ app.get('/user/:id/profile-pic/', function (req, res) {
   let src = profiles[id]['profile-pic'];
   src = __dirname + src;
   res.sendFile(src);
-});
-
-app.put('/changeuser/', function (req, res) {
-  data = req.body;
-  globalThis.user = data.num;
-  const songList = [];
-  for (var i in posts[user]) {
-    songList.push(posts[user][i]);
-  };
-  const userdata = profiles[user];
-  res.end();
 });
 
 module.exports = app;
