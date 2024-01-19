@@ -1,11 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const fs = require('fs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 const posts = require('./data/posts.json');
 const profiles = require('./data/profiles.json'); 
+const profiles_list = JSON.parse(fs.readFileSync('./data/profiles.json'));
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
@@ -58,7 +60,7 @@ app.get('/songs/:user/:tag', function (req, res) {
   res.send(results);
 });
 
-app.get('/users', function (req, res) {
+app.get('/user/ids', function (req, res) {
   var userids = [];
   for(var i in profiles) {
     userids.push(i);
@@ -77,6 +79,18 @@ app.get('/user/:id/profile-pic/', function (req, res) {
   let src = profiles[id]['profile-pic'];
   src = __dirname + src;
   res.sendFile(src);
+});
+
+app.post('/user/new', function (req, res) {  
+  var userids = [];
+  for(var i in profiles) {
+    userids.push(i);
+  };
+  nextnum = parseInt(userids[userids.length - 1]) + 1;
+  num = nextnum.toString();
+  const newUser = { "username": "Username", "biography": "Biography", "profile-pic": "/assets/profile-pictures/blank.png"};
+  profiles_list[num] = (newUser);
+  fs.writeFileSync('./data/profiles.json', JSON.stringify(profiles_list));
 });
 
 module.exports = app;

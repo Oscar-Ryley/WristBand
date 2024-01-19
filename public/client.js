@@ -1,12 +1,12 @@
 window.addEventListener('load', async function (event) {
   reload(0)
-  const response = await fetch('http://127.0.0.1:8080/users/');
-  const body = (await response.json());
-  for (var userid in body){
-    const response = await fetch('http://127.0.0.1:8080/user/'+userid);
-    const user = (await response.json());
+  const userids = await fetch('http://127.0.0.1:8080/user/ids');
+  const useridsbody = (await userids.json());
+  for (var userid of useridsbody){
+    const userdatafromid = await fetch('http://127.0.0.1:8080/user/'+userid);
+    const userfromuserid = (await userdatafromid.json());
     this.document.getElementById("accounts-list").insertAdjacentHTML('beforeBegin',
-        '<li><a class="dropdown-item" href="#" onclick="reload(' +parseInt(userid)+ ')">' +user.username+'</a></li>');
+        '<li><a class="dropdown-item" href="#" onclick="reload(' +parseInt(userid)+ ')">' +userfromuserid.username+'</a></li>');
   };
 }
 );
@@ -47,5 +47,7 @@ async function reload(userid){
 }
 
 async function newuser(){
-  pass
+  const create_new = await fetch("http://127.0.0.1:8080/user/new", {
+    method: "POST"
+  });
 }
