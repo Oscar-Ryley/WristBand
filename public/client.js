@@ -1,13 +1,7 @@
+let GlobalId = 0
+
 window.addEventListener('load', async function (event) {
-  reload(0)
-  const userids = await fetch('http://127.0.0.1:8080/user/ids');
-  const useridsbody = (await userids.json());
-  for (var userid of useridsbody){
-    const userdatafromid = await fetch('http://127.0.0.1:8080/user/'+userid);
-    const userfromuserid = (await userdatafromid.json());
-    this.document.getElementById("accounts-list").insertAdjacentHTML('beforeBegin',
-        '<li><a class="dropdown-item" href="#" onclick="reload(' +parseInt(userid)+ ')">' +userfromuserid.username+'</a></li>');
-  };
+  reload(GlobalId)
 }
 );
 
@@ -41,9 +35,20 @@ async function reload(userid){
     this.document.getElementById('profile-picture-container').innerHTML = "<img id='profile-pic' src='http://127.0.0.1:8080/user/" + userid + "/profile-pic' width='50px' height='50px' alt='profile picture'>";
     this.document.getElementById('profile-picture-container-large').innerHTML = "<img id='profile-pic-large' src='http://127.0.0.1:8080/user/" + userid + "/profile-pic' width='180px' height='180px' alt='profile picture'>";
 
+    this.document.getElementById("accounts-list").innerHTML = "<div class='dropdown-divider'></div><li><a class='dropdown-item' href='#' onclick='newuser()'>+ New User</a></li>"
+    const userids = await fetch('http://127.0.0.1:8080/user/ids');
+    const useridsbody = (await userids.json());
+    for (var fuserid of useridsbody){
+      const userdatafromid = await fetch('http://127.0.0.1:8080/user/'+fuserid);
+      const userfromuserid = (await userdatafromid.json());
+      this.document.getElementById("accounts-list").insertAdjacentHTML('afterBegin',
+          '<li><a class="dropdown-item" href="#" onclick="reload(' +parseInt(fuserid)+ ')">' +userfromuserid.username+'</a></li>');  
+    };
+    
+    GlobalId = userid;
   } catch (e) {
     this.alert(e);
-  }
+  };
 }
 
 async function newuser(){
@@ -51,3 +56,19 @@ async function newuser(){
     method: "POST"
   });
 }
+
+
+const editForm = document.getElementById("user-edit-form");
+
+editForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(editForm);
+    const dataJson  = JSON.stringify(Object.fromEntries(formData.entries()));
+    const edit_current = await fetch("http://127.0.0.1:8080/user/"+GlobalId+"/edit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: dataJson
+  });
+});

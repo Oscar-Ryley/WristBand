@@ -2,12 +2,15 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const fs = require('fs');
+const fileupload = require('express-fileupload')
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use(fileupload());
 
 const posts = require('./data/posts.json');
 const profiles = require('./data/profiles.json'); 
 const profiles_list = JSON.parse(fs.readFileSync('./data/profiles.json'));
+const posts_list = JSON.parse(fs.readFileSync('./data/posts.json'))
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
@@ -86,10 +89,24 @@ app.post('/user/new', function (req, res) {
   for(var i in profiles) {
     userids.push(i);
   };
-  nextnum = parseInt(userids[userids.length - 1]) + 1;
-  num = nextnum.toString();
+  var nextnum = parseInt(userids[userids.length - 1]) + 1;
+  var num = nextnum.toString();
   const newUser = { "username": "Username", "biography": "Biography", "profile-pic": "/assets/profile-pictures/blank.png"};
   profiles_list[num] = (newUser);
+  fs.writeFileSync('./data/profiles.json', JSON.stringify(profiles_list));
+  posts_list[num] = {}
+  fs.writeFileSync('./data/posts.json', JSON.stringify(posts_list));
+});
+
+app.post('/user/:id/edit', function (req, res) {  
+  console.log(JSON.stringify(req.body));
+  const id = req.params.id;
+  //const profileFile = req.files.profile.name
+  //var userdata = profiles_list[id.toString()];
+  const newUsername = req.body["username"];
+  const newBiography = req.body["biography"];
+  //const newProfilePic = req.body["profile-pic"];
+  profiles_list[id.toString()] = {"username": newUsername, "biography": newBiography, "profile-pic":"/assets/profile-pictures/Oscar-Ryley-Profile-Picture.png" };
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profiles_list));
 });
 
