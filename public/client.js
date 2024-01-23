@@ -9,15 +9,16 @@ async function reload(userid){
   try {
     var numposts = 0;
     var column = 1;
-    const response = await fetch('http://127.0.0.1:8080/songs/'+userid);
+    const response = await fetch('http://127.0.0.1:8080/posts/'+userid);
     const body = (await response.json());
     this.document.getElementById('content1').innerHTML = "";
     this.document.getElementById('content2').innerHTML = "";
     this.document.getElementById('content3').innerHTML = "";
     for (var i in body) {
       const current = body[i];
+      console.log(current);
       this.document.getElementById('content'+column).insertAdjacentHTML('afterBegin',
-            `<div class="card song-container my-auto" style="width: 18rem;"><div class="card-body"><h4 class="card-title">${current[1]}</h4><h5 class="card-text">by ${current[2]}</h5><p class="card-text"> Musician: ${current[5]} <br> Instrument: ${current[4]}<br> Date: ${current[0]}</p> <a href="${current[3]}" target = "_blank" class="btn btn-outline-primary" id="link-button">Link to Song on Youtube</a></div></div> <br><br>`
+            `<div class="card song-container my-auto" style="width: 18rem;"><div class="card-body"><h4 class="card-title">${current["name"]}</h4><h5 class="card-text">by ${current["author"]}</h5><p class="card-text"> Musician: ${current["musician"]} <br> Instrument: ${current["instrument"]}<br> Date: ${current["date"]}</p> <a href="${current["link"]}" target = "_blank" class="btn btn-outline-primary" id="link-button">Link to Song on Youtube</a></div></div> <br><br>`
       );
       numposts ++;
       column ++;
@@ -81,7 +82,7 @@ logForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(logForm);
     const dataJson  = JSON.stringify(Object.fromEntries(formData.entries()));
-    const edit_current = await fetch("/songs/"+GlobalId+"/new", {
+    const edit_current = await fetch("/posts/"+GlobalId+"/new", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

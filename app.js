@@ -34,7 +34,7 @@ app.get('/tags', function (req, res) {
   res.send([...tagSet]);
 });
 
-app.get('/songs/:user', function (req, res) {
+app.get('/posts/:user', function (req, res) {
   const user = req.params.user;
   const songList = [];
   for (var i in posts[user]) {
@@ -42,12 +42,12 @@ app.get('/songs/:user', function (req, res) {
   };
   var results = [];
   for (const song of songList) {
-      results.push(song.text);
+      results.push(song);
   };
   res.send(results);
 });
 
-app.get('/songs/:user/:tag', function (req, res) {
+app.get('/posts/:user/:tag', function (req, res) {
   const tag = req.params.tag;
   const user = req.params.user;
   var songList = [];
@@ -57,13 +57,13 @@ app.get('/songs/:user/:tag', function (req, res) {
   var results = [];
   for (const song of songList) {
     if (song.tags.includes(tag)) {
-      results.push(song.text);
+      results.push(song);
     }
   }
   res.send(results);
 });
 
-app.post('/songs/:user/new', function (req, res) {  
+app.post('/posts/:user/new', function (req, res) {  
   const user = req.params.user;
   const newSongName = req.body["song-name"];
   const newSongAuthor = req.body["song-author"];
@@ -71,12 +71,10 @@ app.post('/songs/:user/new', function (req, res) {
   const newDate = req.body["song-date"];
   const newLink = req.body["song-link"];
   const newInstrument = req.body["song-instrument"];
-  const newTagsList = []
-  var nextnum = parseInt(posts_list[user.toString()].length) + 1;
+  const newTagsList = [newInstrument, newMusician, newDate, newSongName, newSongAuthor]
+  var nextnum = Object.keys(posts_list[user.toString()]).length;
   var number = nextnum.toString();
-  if (number == "NaN"){
-    number = "0";
-  };
+  console.log(number);
   const newPost = {"date": newDate, "name": newSongName, "author": newSongAuthor, "link": newLink, "instrument": newInstrument, "musician": newMusician, "tags":newTagsList }
   posts_list[user.toString()][number] = newPost;
   fs.writeFileSync('./data/posts.json', JSON.stringify(posts_list));
