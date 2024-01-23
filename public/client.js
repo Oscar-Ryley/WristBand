@@ -55,6 +55,7 @@ async function newuser(){
   const create_new = await fetch("http://127.0.0.1:8080/user/new", {
     method: "POST"
   });
+  reload(GlobalId);
 }
 
 
@@ -71,4 +72,21 @@ editForm.addEventListener("submit", async (event) => {
     },
     body: dataJson
   });
+  reload(GlobalId);
+});
+
+const logForm = document.getElementById("song-input-form");
+
+logForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(logForm);
+    const dataJson  = JSON.stringify(Object.fromEntries(formData.entries()));
+    const edit_current = await fetch("/songs/"+GlobalId+"/new", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: dataJson
+  });
+  reload(GlobalId);
 });

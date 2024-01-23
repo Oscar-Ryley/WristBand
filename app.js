@@ -63,6 +63,25 @@ app.get('/songs/:user/:tag', function (req, res) {
   res.send(results);
 });
 
+app.post('/songs/:user/new', function (req, res) {  
+  const user = req.params.user;
+  const newSongName = req.body["song-name"];
+  const newSongAuthor = req.body["song-author"];
+  const newMusician = req.body["song-musician"];
+  const newDate = req.body["song-date"];
+  const newLink = req.body["song-link"];
+  const newInstrument = req.body["song-instrument"];
+  const newTagsList = []
+  var nextnum = parseInt(posts_list[user.toString()].length) + 1;
+  var number = nextnum.toString();
+  if (number == "NaN"){
+    number = "0";
+  };
+  const newPost = {"date": newDate, "name": newSongName, "author": newSongAuthor, "link": newLink, "instrument": newInstrument, "musician": newMusician, "tags":newTagsList }
+  posts_list[user.toString()][number] = newPost;
+  fs.writeFileSync('./data/posts.json', JSON.stringify(posts_list));
+});
+
 app.get('/user/ids', function (req, res) {
   var userids = [];
   for(var i in profiles) {
@@ -99,13 +118,9 @@ app.post('/user/new', function (req, res) {
 });
 
 app.post('/user/:id/edit', function (req, res) {  
-  console.log(JSON.stringify(req.body));
   const id = req.params.id;
-  //const profileFile = req.files.profile.name
-  //var userdata = profiles_list[id.toString()];
   const newUsername = req.body["username"];
   const newBiography = req.body["biography"];
-  //const newProfilePic = req.body["profile-pic"];
   profiles_list[id.toString()] = {"username": newUsername, "biography": newBiography, "profile-pic":"/assets/profile-pictures/Oscar-Ryley-Profile-Picture.png" };
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profiles_list));
 });

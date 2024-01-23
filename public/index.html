@@ -97,12 +97,14 @@
                     <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form id="song-input-form" class="form-inline">
-                        <input id="song-name" class="form-control" type="input" placeholder="Song Title">
-                        <input id="song-name" class="form-control" type="input" placeholder="Song Author">
-                        <input id="song-name" class="form-control" type="input" placeholder="Musician">
-                        <input id="song-name" class="form-control" type="input" placeholder="Date">
-                        <button type="submit" class="btn btn-outline-primary" data-dismiss="modal">Post</button>
+                    <form id="song-input-form">
+                        <input name="song-name" type="text" class="form-control" placeholder="Song Title">
+                        <input name="song-author" type="text" class="form-control" placeholder="Song Author">
+                        <input name="song-musician" type="text" class="form-control" placeholder="Musician">
+                        <input name="song-instrument" type="text" class="form-control" placeholder="Instrument">
+                        <input name="song-link" type="text" class="form-control" placeholder="YouTube link to the song">
+                        <input name="song-date" type="text" class="form-control" placeholder="Date">
+                        <button type="submit" class="btn btn-outline-primary">Post</button>
                     </form>
                 </div>
                 <div class="modal-footer">
