@@ -20,17 +20,16 @@ app.get('/', (req, res) => {
     };
     res.writeHeader(200, { 'Content-Type': 'text/html' });
     res.write(html);
-    res.sendStatus(200);
   });
 });
 
 app.get('/tags', function (req, res) {
   let tags = [];
-  for (const item in postsList) {
-    for (const i in item) {
-      tags = tags.concat(i.tags);
+  for (const i in postsList) {
+    for (const j in postsList[i]) {
+      tags = tags.concat(postsList[i][j].tags);
     }
-  }
+  };
   const tagSet = new Set(tags);
   res.send([...tagSet]);
 });
@@ -102,6 +101,20 @@ app.get('/user/:id/profile-pic/', function (req, res) {
   res.sendFile(src);
 });
 
+app.post('/user/:id/profile-pic/upload', function (req, res) {
+  const id = req.params.id;
+  profileImageFile = req.files.profImage;
+  fileDirectory = '/assets/profile-pictures/' + profileImageFile.name
+  uploadPath = __dirname + fileDirectory;
+  profileImageFile.mv(uploadPath, function(err) {
+    if (err)
+      return res.sendStatus(500);
+  });
+  profilesList[id.toString()]['profile-pic'] = fileDirectory;
+  fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
+  res.sendStatus(200);
+});
+
 app.post('/user/new', function (req, res) {
   const userids = [];
   for (const i in profiles) {
@@ -114,16 +127,17 @@ app.post('/user/new', function (req, res) {
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
   postsList[num] = {};
   fs.writeFileSync('./data/posts.json', JSON.stringify(postsList));
-  res.send(200);
+  res.sendStatus(200);
 });
 
 app.post('/user/:id/edit', function (req, res) {
   const id = req.params.id;
   const newUsername = req.body.username;
   const newBiography = req.body.biography;
-  profilesList[id.toString()] = { username: newUsername, biography: newBiography, 'profile-pic': '/assets/profile-pictures/Oscar-Ryley-Profile-Picture.png' };
+  profilesList[id.toString()].username = newUsername;
+  profilesList[id.toString()].biography = newBiography;
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
-  res.send(200);
+  res.sendStatus(200);
 });
 
 module.exports = app;

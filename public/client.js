@@ -81,6 +81,21 @@ editForm.addEventListener('submit', async (event) => {
   });
 });
 
+const picForm = document.getElementById('profile-upload-form');
+
+picForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const formData = new FormData(picForm);
+  const dataJson = Object.fromEntries(formData.entries());
+  await fetch('http://127.0.0.1:8080/user/' + GlobalId + '/profile-pic/upload', {
+    method: 'POST',
+    headers: {
+      'encType': 'multipart/form-data'
+    },
+    body: formData
+  });
+});
+
 const logForm = document.getElementById('song-input-form');
 
 logForm.addEventListener('submit', async (event) => {

@@ -104,6 +104,7 @@
                         <input name="song-instrument" type="text" class="form-control" placeholder="Instrument">
                         <input name="song-link" type="text" class="form-control" placeholder="YouTube link to the song">
                         <input name="song-date" type="text" class="form-control" placeholder="Date">
+                        <br>
                         <button type="submit" class="btn btn-outline-primary">Post</button>
                     </form>
                 </div>
@@ -122,15 +123,19 @@
                     <button type="button" class="close" data-dismiss="modal" style="color:white;">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <!--<h5>Update Profile Picture</h5>-->
+                    <form id="profile-upload-form">
+                        <label>Upload new Profile Picture</label>
+                        <input type="file" name="profImage" />
+                        <button type="submit" class="btn btn-outline-primary">Upload</button>
+                    </form>
+                    <br>
                     <form id="user-edit-form">
-                        <!--<input type="file" name="profile-pic" class="form-control-file" id="profile-pic-upload">-->
                         <input id="username-input" type="text" name="username" class="form-control" placeholder="new username" defaultValue = "">
                         <input id="biography-input" type="text" name="biography" class="form-control" placeholder="new biography" defaultValue= "">
+                        <br>
                         <button type="submit" class="btn btn-outline-primary">Save</button>
                     </form>
                 </div>
-                
             </div>
             </div>
         </div>

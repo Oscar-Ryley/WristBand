@@ -9,11 +9,17 @@ describe('Test the basic page is loading', () => {
 	    .get('/')
 	    .expect('Content-type', /html/);
     });
-    
+
     test('GET /tags succeeds', () => {
         return request(app)
 	    .get('/tags')
 	    .expect(200);
+    });
+
+    test('GET /tags contains "Prog"', () => {
+        return request(app)
+	    .get('/tags')
+	    .expect(/Prog/);
     });
 });
 
@@ -52,10 +58,10 @@ describe('Testing user Entity', () => {
 	    .expect(/0/);
     });
 
-    test('GET /user/0 succeeds', () => {
+    test('GET /user/0 Json Profile data', () => {
         return request(app)
 	    .get('/user/0')
-	    .expect(200);
+	    .expect('Content-type', /json/);
     });
 
     test('GET /user/0/profile-pic/ returns an image', () => {
@@ -64,7 +70,7 @@ describe('Testing user Entity', () => {
 	    .expect('Content-type', /image/);
     });
 
-    test('GET /user/new succeeds', () => {
+    test('POST /user/new succeeds', () => {
         return request(app)
 	    .get('/user/new')
 	    .expect(200);
