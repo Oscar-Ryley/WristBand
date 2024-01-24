@@ -1,22 +1,21 @@
-let GlobalId = 0
+let GlobalId = 0;
 
 window.addEventListener('load', async function (event) {
-  reload(GlobalId)
+  reload(GlobalId, "");
 }
 );
 
-async function reload(userid){
+async function reload(userid, tag){
   try {
     var numposts = 0;
     var column = 1;
-    const response = await fetch('http://127.0.0.1:8080/posts/'+userid);
+    const response = await fetch('http://127.0.0.1:8080/posts/'+userid+'/'+tag);
     const body = (await response.json());
     this.document.getElementById('content1').innerHTML = "";
     this.document.getElementById('content2').innerHTML = "";
     this.document.getElementById('content3').innerHTML = "";
     for (var i in body) {
       const current = body[i];
-      console.log(current);
       this.document.getElementById('content'+column).insertAdjacentHTML('afterBegin',
             `<div class="card song-container my-auto" style="width: 18rem;"><div class="card-body"><h4 class="card-title">${current["name"]}</h4><h5 class="card-text">by ${current["author"]}</h5><p class="card-text"> Musician: ${current["musician"]} <br> Instrument: ${current["instrument"]}<br> Date: ${current["date"]}</p> <a href="${current["link"]}" target = "_blank" class="btn btn-outline-primary" id="link-button">Link to Song on Youtube</a></div></div> <br><br>`
       );
@@ -53,12 +52,19 @@ async function reload(userid){
 }
 
 async function newuser(){
-  const create_new = await fetch("http://127.0.0.1:8080/user/new", {
+  await fetch("http://127.0.0.1:8080/user/new", {
     method: "POST"
   });
-  reload(GlobalId);
-}
+};
 
+const tagsForm = document.getElementById("search-bar-form");
+
+tagsForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const formData = new FormData(tagsForm);
+  const dataJson  = Object.fromEntries(formData.entries());
+  reload(GlobalId, dataJson["tag-query"]);
+});
 
 const editForm = document.getElementById("user-edit-form");
 
@@ -73,7 +79,6 @@ editForm.addEventListener("submit", async (event) => {
     },
     body: dataJson
   });
-  reload(GlobalId);
 });
 
 const logForm = document.getElementById("song-input-form");
@@ -89,5 +94,4 @@ logForm.addEventListener("submit", async (event) => {
     },
     body: dataJson
   });
-  reload(GlobalId);
 });

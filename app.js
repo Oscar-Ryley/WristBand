@@ -74,10 +74,10 @@ app.post('/posts/:user/new', function (req, res) {
   const newTagsList = [newInstrument, newMusician, newDate, newSongName, newSongAuthor]
   var nextnum = Object.keys(posts_list[user.toString()]).length;
   var number = nextnum.toString();
-  console.log(number);
   const newPost = {"date": newDate, "name": newSongName, "author": newSongAuthor, "link": newLink, "instrument": newInstrument, "musician": newMusician, "tags":newTagsList }
   posts_list[user.toString()][number] = newPost;
   fs.writeFileSync('./data/posts.json', JSON.stringify(posts_list));
+  res.send("200");
 });
 
 app.get('/user/ids', function (req, res) {
@@ -113,6 +113,7 @@ app.post('/user/new', function (req, res) {
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profiles_list));
   posts_list[num] = {}
   fs.writeFileSync('./data/posts.json', JSON.stringify(posts_list));
+  res.send("200");
 });
 
 app.post('/user/:id/edit', function (req, res) {  
@@ -121,6 +122,7 @@ app.post('/user/:id/edit', function (req, res) {
   const newBiography = req.body["biography"];
   profiles_list[id.toString()] = {"username": newUsername, "biography": newBiography, "profile-pic":"/assets/profile-pictures/Oscar-Ryley-Profile-Picture.png" };
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profiles_list));
+  res.send("200");
 });
 
 module.exports = app;
