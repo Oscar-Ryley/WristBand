@@ -11,7 +11,6 @@ const posts = require('./data/posts.json');
 const profiles = require('./data/profiles.json');
 const profilesList = JSON.parse(fs.readFileSync('./data/profiles.json'));
 const postsList = JSON.parse(fs.readFileSync('./data/posts.json'));
-const songList = [];
 
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
@@ -21,14 +20,16 @@ app.get('/', (req, res) => {
     };
     res.writeHeader(200, { 'Content-Type': 'text/html' });
     res.write(html);
-    res.send('403');
+    res.sendStatus(200);
   });
 });
 
 app.get('/tags', function (req, res) {
   let tags = [];
-  for (const item of songList) {
-    tags = tags.concat(item.tags);
+  for (const item in postsList) {
+    for (const i in item) {
+      tags = tags.concat(i.tags);
+    }
   }
   const tagSet = new Set(tags);
   res.send([...tagSet]);
@@ -77,7 +78,7 @@ app.post('/posts/:user/new', function (req, res) {
   const newPost = { date: newDate, name: newSongName, author: newSongAuthor, link: newLink, instrument: newInstrument, musician: newMusician, tags: newTagsList };
   postsList[user.toString()][number] = newPost;
   fs.writeFileSync('./data/posts.json', JSON.stringify(postsList));
-  res.send('200');
+  res.sendStatus(200);
 });
 
 app.get('/user/ids', function (req, res) {
@@ -113,7 +114,7 @@ app.post('/user/new', function (req, res) {
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
   postsList[num] = {};
   fs.writeFileSync('./data/posts.json', JSON.stringify(postsList));
-  res.send('200');
+  res.send(200);
 });
 
 app.post('/user/:id/edit', function (req, res) {
@@ -122,7 +123,7 @@ app.post('/user/:id/edit', function (req, res) {
   const newBiography = req.body.biography;
   profilesList[id.toString()] = { username: newUsername, biography: newBiography, 'profile-pic': '/assets/profile-pictures/Oscar-Ryley-Profile-Picture.png' };
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
-  res.send('200');
+  res.send(200);
 });
 
 module.exports = app;
