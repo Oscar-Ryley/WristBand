@@ -9,26 +9,6 @@ describe('Testing the page is loading', () => {
 	    .get('/')
 	    .expect('Content-type', /html/);
     });
-
-    describe('GET /tags', () => {
-        test('succeeds', () => {
-            return request(app)
-            .get('/tags')
-            .expect(200);
-        });
-    
-        test('returns a json file', () => {
-            return request(app)
-            .get('/tags')
-            .expect('Content-type', /json/);
-        });
-    
-        test('contains the tag "Prog"', () => {
-            return request(app)
-            .get('/tags')
-            .expect(/Prog/);
-        });
-    });
 });
 
 describe('Testing posts Entity', () => {
@@ -43,6 +23,26 @@ describe('Testing posts Entity', () => {
             return request(app)
             .get('/posts')
             .expect('Content-type', /json/);
+        });
+    });
+
+    describe('GET /posts/tags', () => {
+        test('succeeds', () => {
+            return request(app)
+            .get('/posts/tags')
+            .expect(200);
+        });
+    
+        test('returns a json file', () => {
+            return request(app)
+            .get('/posts/tags')
+            .expect('Content-type', /json/);
+        });
+    
+        test('contains the tag "Prog"', () => {
+            return request(app)
+            .get('/posts/tags')
+            .expect(/Prog/);
         });
     });
 

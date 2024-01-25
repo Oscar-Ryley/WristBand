@@ -25,7 +25,13 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/tags', function (req, res) {
+// Posts
+
+app.get('/posts', function (req, res) {
+  res.send(postsList);
+});
+
+app.get('/posts/tags', function (req, res) {
   let tags = [];
   for (const i in postsList) {
     for (const j in postsList[i]) {
@@ -34,12 +40,6 @@ app.get('/tags', function (req, res) {
   };
   const tagSet = new Set(tags);
   res.send([...tagSet]);
-});
-
-// Posts
-
-app.get('/posts', function (req, res) {
-  res.send(postsList);
 });
 
 app.get('/posts/:user', function (req, res) {
@@ -88,7 +88,11 @@ app.post('/posts/:user/new', function (req, res) {
   res.sendStatus(200);
 });
 
-// User
+// Users
+
+app.get('/user', function (req, res) {
+  res.send(profilesList);
+});
 
 app.get('/user/ids', function (req, res) {
   const userids = [];
