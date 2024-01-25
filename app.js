@@ -17,8 +17,8 @@ const postsList = JSON.parse(fs.readFileSync('./data/posts.json'));
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
     if (error) {
-      res.writeHeader(403, { 'Content-Type': 'text/html' });
-      res.write('<h1>403 error file not found</h1>');
+      res.writeHeader(404, { 'Content-Type': 'text/html' });
+      res.write('<h1>404 error file not found</h1>');
     };
     res.writeHeader(200, { 'Content-Type': 'text/html' });
     res.write(html);
@@ -109,16 +109,20 @@ app.get('/user/:id', function (req, res) {
 });
 
 app.get('/user/:id/profile-pic/', function (req, res) {
-  const id = req.params.id;
-  let src = profiles[id]['profile-pic'];
-  src = __dirname + src;
-  res.sendFile(src);
+  try {
+    const id = req.params.id;
+    let src = profiles[id]['profile-pic'];
+    src = __dirname + src;
+    res.sendFile(src);
+  } catch (e) {
+    res.sendStatus(404);
+  }
 });
 
 app.post('/user/:id/profile-pic/upload', function (req, res) {
   const id = req.params.id;
   if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400);
+    return res.status(415);
   }
   const profileImageFile = req.files.profImage;
   const fileDirectory = '/assets/profile-pictures/' + profileImageFile.name;

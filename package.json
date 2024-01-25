@@ -4,7 +4,7 @@
   "description": "ProgBlack Coursework npm project",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "jest",
     "pretest": "eslint app.js server.js"
   },

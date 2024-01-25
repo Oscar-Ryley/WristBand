@@ -3,11 +3,23 @@
 const request = require('supertest');
 const app = require('./app');
 
-describe('Testing the page is loading', () => {
-    test('GET / returns index.html', () => {
+describe('GET /', () => {
+    test('succeeds', () => {
+        return request(app)
+	    .get('/')
+	    .expect(200);
+    });
+    
+    test('returns index.html', () => {
         return request(app)
 	    .get('/')
 	    .expect('Content-type', /html/);
+    });
+
+    test('returns 404 when erroneous GET request made', () => {
+        return request(app)
+	    .get('/frog')
+	    .expect(404);
     });
 });
 
@@ -74,11 +86,31 @@ describe('Testing posts Entity', () => {
 });
 
 describe('Testing user Entity', () => {
+    describe('GET /user', () => {
+        test('succeeds', () => {
+            return request(app)
+            .get('/user')
+            .expect(200);
+        });
+        
+        test('returns a json list', () => {
+            return request(app)
+            .get('/user')
+            .expect('Content-type', /json/);
+        });
+    });
+
     describe('GET /user/ids', () => {
         test('succeeds', () => {
             return request(app)
             .get('/user/ids')
             .expect(200);
+        });
+        
+        test('returns a json list', () => {
+            return request(app)
+            .get('/user/ids')
+            .expect('Content-type', /json/);
         });
 
         test('includes "0"', () => {
@@ -89,7 +121,7 @@ describe('Testing user Entity', () => {
     });
 
     describe('GET /user/:id', () => {
-        test('returns Json Profile data', () => {
+        test('returns json Profile data', () => {
             return request(app)
             .get('/user/0')
             .expect('Content-type', /json/);
@@ -102,11 +134,13 @@ describe('Testing user Entity', () => {
             .get('/user/0/profile-pic/')
             .expect('Content-type', /image/);
         });
+
+        test('returns 404 if user does not exist, as cannot be found', () => {
+            return request(app)
+            .get('/user/100000000/profile-pic/')
+            .expect(404);
+        });
     });
-
-    describe('POST /user/:id/profile-pic/upload', () => {
-
-    }); 
 
     describe('POST /user/new', () => {
         test('succeeds', () => {
