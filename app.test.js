@@ -76,7 +76,7 @@ describe('Testing posts Entity', () => {
 
     describe('POST /posts/:user/new', () => {
         test('succeeds', () => {
-            const params = { 'song-name': 'Happy Birthday', 'song-author': 'Patty Hill', 'song-musician': 'Oscar Ryley', 'song-date': '05/05/2024', 'song-link': 'https://www.youtube.com/watch?v=inS9gAgSENE', 'song-instrument': 'Voice' };
+            const params = { 'song-name': 'Happy Birthday', 'song-author': 'Patty Hill', 'song-musician': 'Homer Simpson', 'song-date': '05/05/2024', 'song-link': 'https://www.youtube.com/watch?v=inS9gAgSENE', 'song-instrument': 'Voice' };
             return request(app)
             .post('/posts/2/new')
             .send(params)
