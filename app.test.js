@@ -66,7 +66,7 @@ describe('Testing posts Entity', () => {
         test('succeeds', () => {
             const params = { 'song-name': 'Happy Birthday', 'song-author': 'Patty Hill', 'song-musician': 'Oscar Ryley', 'song-date': '05/05/2024', 'song-link': 'https://www.youtube.com/watch?v=inS9gAgSENE', 'song-instrument': 'Voice' };
             return request(app)
-            .post('/posts/0/new')
+            .post('/posts/2/new')
             .send(params)
             .expect(200);
         });
@@ -120,7 +120,7 @@ describe('Testing user Entity', () => {
         test('succeeds', () => {
             const params = { 'username': 'newUsername', 'biography': 'newBio'};
             return request(app)
-            .post('/user/0/edit')
+            .post('/user/2/edit')
             .send(params)
             .expect(200);
         });
@@ -128,7 +128,7 @@ describe('Testing user Entity', () => {
         test('throws a 400 when both fields are empty', () => {
             const params = { 'username': '', 'biography': ''};
             return request(app)
-            .post('/user/0/edit')
+            .post('/user/2/edit')
             .send(params)
             .expect(400);
         });
