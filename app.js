@@ -12,6 +12,8 @@ const profiles = require('./data/profiles.json');
 const profilesList = JSON.parse(fs.readFileSync('./data/profiles.json'));
 const postsList = JSON.parse(fs.readFileSync('./data/posts.json'));
 
+// General
+
 app.get('/', (req, res) => {
   fs.readFile('index.html', function (error, html) {
     if (error) {
@@ -32,6 +34,12 @@ app.get('/tags', function (req, res) {
   };
   const tagSet = new Set(tags);
   res.send([...tagSet]);
+});
+
+// Posts
+
+app.get('/posts', function (req, res) {
+  res.send(postsList);
 });
 
 app.get('/posts/:user', function (req, res) {
@@ -80,6 +88,8 @@ app.post('/posts/:user/new', function (req, res) {
   res.sendStatus(200);
 });
 
+// User
+
 app.get('/user/ids', function (req, res) {
   const userids = [];
   for (const i in profiles) {
@@ -103,12 +113,16 @@ app.get('/user/:id/profile-pic/', function (req, res) {
 
 app.post('/user/:id/profile-pic/upload', function (req, res) {
   const id = req.params.id;
-  profileImageFile = req.files.profImage;
-  fileDirectory = '/assets/profile-pictures/' + profileImageFile.name
-  uploadPath = __dirname + fileDirectory;
-  profileImageFile.mv(uploadPath, function(err) {
-    if (err)
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400);
+  }
+  const profileImageFile = req.files.profImage;
+  const fileDirectory = '/assets/profile-pictures/' + profileImageFile.name;
+  const uploadPath = __dirname + fileDirectory;
+  profileImageFile.mv(uploadPath, function (err) {
+    if (err) {
       return res.sendStatus(500);
+    };
   });
   profilesList[id.toString()]['profile-pic'] = fileDirectory;
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
@@ -134,6 +148,10 @@ app.post('/user/:id/edit', function (req, res) {
   const id = req.params.id;
   const newUsername = req.body.username;
   const newBiography = req.body.biography;
+  console.log(newUsername);
+  if (newUsername.length === 0 && newBiography.length === 0) {
+    return res.sendStatus(400);
+  };
   profilesList[id.toString()].username = newUsername;
   profilesList[id.toString()].biography = newBiography;
   fs.writeFileSync('./data/profiles.json', JSON.stringify(profilesList));
