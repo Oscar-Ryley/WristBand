@@ -1,0 +1,33 @@
+My Website Project is called WristBand, it is a website for users to posts
+about concerts that they have been to, in order to log songs seen live.
+
+The Website's data is made up of two entities, users and posts.
+They have a one-to-many relationship, one user can have many posts.
+
+Each User includes a profile picture variable that has it's own GET and POST requests;
+it is an image entity with a one-to-one relationship with their respective user entities.
+
+The functionality of the website is made up of searching through and adding to data about
+users and user's posts.
+
+SHOW:
+
+SCROLLING THROUGH EXISTING POSTS
+
+CLICKING ON THE YOUTUBE LINK FOR A POST
+
+SWITCHING BETWEEN USERS
+
+SEARCHING FOR TAGS VIA THE NAVBAR SEARCH BAR for profiles 1 and 2
+
+
+ADDING A NEW USER
+
+EDITING A USER
+
+LOGGING A SONG
+
+
+ATTEMPTING TO EDIT A USER WITH BLANK FIELDS
+
+UPDATING/ UPLOADING A PROFILE PICTURE
